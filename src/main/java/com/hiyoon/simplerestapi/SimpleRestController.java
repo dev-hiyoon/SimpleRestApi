@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SimpleRestController {
 
-    @GetMapping(value = "/{name}")
-    public UserVo delay(@PathVariable("name") String name) throws InterruptedException {
-        log.info("############# delayResponse. name: {}", name);
+    @GetMapping(value = "/{id}")
+    public UserVo delay(@PathVariable("id") String id) throws InterruptedException {
+        log.info("############# delayResponse. id: {}", id);
         Thread.sleep(2 * 1000);
         return UserVo.builder()
-                .id(name)
-                .nodeId("node" + name)
+                .id(id)
+                .nodeId("node" + id)
+                .nextPageYn(Integer.valueOf(id) > 3 ? "N" : "Y")
                 .build();
     }
 }
